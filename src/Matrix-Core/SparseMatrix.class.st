@@ -82,3 +82,14 @@ SparseMatrix >> printOn: aStream [
         aStream cr. 
     ].
 ]
+
+{ #category : 'as yet unclassified' }
+SparseMatrix >> toMatrix [
+"Convert a sparse matrix to full matrix"
+    | matrix |
+    matrix := Matrix rows: rows columns: columns.
+    elements do: [:element |
+        matrix atColumn: element column atRow: element row  put: element value.
+    ].
+    ^matrix
+]

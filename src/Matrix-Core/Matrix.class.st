@@ -90,3 +90,20 @@ Matrix >> printOn: aStream [
         aStream cr. 
     ].
 ]
+
+{ #category : 'as yet unclassified' }
+Matrix >> toSparseMatrix [
+"Convert a matrix to a sparse matix"
+    | sparseMatrix |
+    sparseMatrix := SparseMatrix rows: rows columns: columns.
+    1 to: rows do: [:i |
+        1 to: columns do: [:j |
+            | value |
+            value := self atColumn: j atRow: i.
+            value ~= 0 ifTrue: [
+                sparseMatrix atColumn: j atRow: i put: value. 
+            ].
+        ].
+    ].
+    ^sparseMatrix
+]
