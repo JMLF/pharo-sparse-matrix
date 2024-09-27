@@ -49,12 +49,6 @@ Matrix >> data [
 	^data
 ]
 
-{ #category : 'accessing' }
-Matrix >> data: anArray [ 
-
-	data := anArray .
-]
-
 { #category : 'initialization' }
 Matrix >> initializeValue: aValue rows: rowsNumber columns: columnsNumber [ 
 

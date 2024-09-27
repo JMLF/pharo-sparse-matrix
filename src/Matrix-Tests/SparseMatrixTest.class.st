@@ -17,6 +17,17 @@ SparseMatrixTest >> testMatrixCreationSize [
 ]
 
 { #category : 'tests' }
+SparseMatrixTest >> testOutOfBoundsAccess [ 
+"Test out of limit access"
+
+		  | matrix |
+		  matrix := SparseMatrix rows: 3 columns: 3. 
+        self should: [matrix atColumn: 4 atRow: 4] raise: Error.
+        self should: [matrix atColumn: 1 atRow: 4] raise: Error.
+        self should: [matrix atColumn: 4 atRow: 1] raise: Error.
+]
+
+{ #category : 'tests' }
 SparseMatrixTest >> testSetElementNonZero [
 	"Test setting a non-zero value in the sparse matrix"
 
@@ -38,6 +49,28 @@ SparseMatrixTest >> testSetElementZero [
 	sparseMatrix atColumn: 2 atRow: 2 put: 0.
 	self assert: (sparseMatrix atColumn: 2 atRow: 2) equals: 0.
 	self assert: sparseMatrix elements isEmpty
+]
+
+{ #category : 'tests' }
+SparseMatrixTest >> testSparseMatrixToMatrix [
+	"Test conversion from SparseMatrix to Matrix"
+
+	| matrix sparseMatrix |
+	sparseMatrix := SparseMatrix rows: 3 columns: 3.
+	sparseMatrix atColumn: 1 atRow: 1 put: 3.
+	sparseMatrix atColumn: 2 atRow: 2 put: 5.
+
+	matrix := sparseMatrix toMatrix.
+
+	"Matrix should contain as much elements as it size"
+	self assert: (matrix atColumn: 1 atRow: 1) equals: 3.
+	self assert: (matrix atColumn: 2 atRow: 2) equals: 5.
+	
+	self assert: matrix data size equals: 3. "3 rows"
+	"of 3 columns"
+	    1 to: 3 do: [:i |
+        self assert: (matrix data at: i) size equals: 3 . 
+    ].
 ]
 
 { #category : 'tests' }
