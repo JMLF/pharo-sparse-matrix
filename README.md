@@ -6,7 +6,7 @@ Pharo matrix package
 ```smalltalk
 Metacello new
 	repository: 'github://JMLF/pharo-sparse-matrix:main';
-	baseline: 'BaselineOfMatrix';
+	baseline: 'Matrix';
 	onConflictUseLoaded;
 	load.
 ```
